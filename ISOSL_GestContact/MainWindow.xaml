@@ -1,0 +1,59 @@
+﻿<Window x:Class="ISOSL_GestContact.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ISOSL_GestContact"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" DataContext="{Binding Main, Source={StaticResource Locator}}" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="6*" />
+        </Grid.ColumnDefinitions>
+        <!-- Formulaire -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Content="_Nom" Target="{Binding ElementName=TBx_Nom}" />
+            <Label Grid.Row="1" Content="_Prenom" Target="{Binding ElementName=TBx_Prenom}" />
+            <TextBox Grid.Column="1" x:Name="TBx_Nom" Text="{Binding Nom, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Column="1" Grid.Row="1" x:Name="TBx_Prenom" Text="{Binding Prenom, UpdateSourceTrigger=PropertyChanged}" />
+            <ComboBox x:Name="ListPays" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Pays.Items, Source={StaticResource Locator}}" SelectedItem="{Binding Pays}" />
+            <Button Grid.Row="3" Content="Add" Grid.ColumnSpan="2" IsDefault="True" Margin="0,5" Command="{Binding AddCommand}" />
+            <Button Grid.Row="4" Content="Cancel" Grid.ColumnSpan="2" IsCancel="True" Command="{Binding CancelCommand}" />
+        </Grid>
+        <!-- DataGrid -->
+        <DataGrid Grid.Column="1" ItemsSource="{Binding Items}" AutoGenerateColumns="False" IsReadOnly="True" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeRows="False" CanUserResizeColumns="False" CanUserReorderColumns="False" CanUserSortColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="*" />
+                <DataGridTextColumn Header="Prenom" Binding="{Binding Prenom}" Width="*" />
+                <DataGridTextColumn Header="Pays" Binding="{Binding Pays}" Width="*" />
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="&#xE104;" FontFamily="Segoe UI Symbol" Command="{Binding UpdateCommand}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="&#xE107;" FontFamily="Segoe UI Symbol" Command="{Binding DeleteCommand}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

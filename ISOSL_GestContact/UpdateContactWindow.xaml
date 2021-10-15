@@ -1,0 +1,31 @@
+﻿<Window x:Class="ISOSL_GestContact.UpdateContactWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ISOSL_GestContact"
+        mc:Ignorable="d"
+        Title="UpdateContact" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label Content="_Nom" Target="{Binding ElementName=TBx_Nom}" />
+        <Label Grid.Row="1" Content="_Prenom" Target="{Binding ElementName=TBx_Prenom}" />
+        <Label Grid.Row="2" Content="P_ays" />
+        <TextBox Grid.Column="1" x:Name="TBx_Nom" Text="{Binding Nom, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="1" Grid.Row="1" x:Name="TBx_Prenom" Text="{Binding Prenom, UpdateSourceTrigger=PropertyChanged}" />
+        <ComboBox x:Name="ListPays" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Pays.Items, Source={StaticResource Locator}}" SelectedItem="{Binding Pays}" />
+        <Button Grid.Row="3" Content="Save" Grid.ColumnSpan="2" IsDefault="True" Margin="0,5" Command="{Binding SaveCommand}" />
+        <Button Grid.Row="4" Content="Cancel" Grid.ColumnSpan="2" IsCancel="True" Command="{Binding CancelCommand}" />
+    </Grid>
+</Window>
